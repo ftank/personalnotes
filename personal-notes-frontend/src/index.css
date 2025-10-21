@@ -1,0 +1,313 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Cores personalizadas */
+  --color-notion-text: #37352f;
+  --color-notion-bg: #ffffff;
+  --color-notion-sidebar: #f7f6f3;
+  --color-notion-border: rgba(55, 53, 47, 0.06);
+  --color-notion-hover: rgba(55, 53, 47, 0.03);
+
+  --color-notion-dark-text: rgba(255, 255, 255, 0.9);
+  --color-notion-dark-bg: #191919;
+  --color-notion-dark-sidebar: #202020;
+  --color-notion-dark-border: rgba(255, 255, 255, 0.1);
+  --color-notion-dark-hover: rgba(255, 255, 255, 0.05);
+
+  /* Cores primary */
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+
+  /* Cores secondary */
+  --color-secondary-50: #fdf2f8;
+  --color-secondary-100: #fce7f3;
+  --color-secondary-200: #fbcfe8;
+  --color-secondary-300: #f9a8d4;
+  --color-secondary-400: #f472b6;
+  --color-secondary-500: #ec4899;
+  --color-secondary-600: #db2777;
+  --color-secondary-700: #be185d;
+  --color-secondary-800: #9d174d;
+  --color-secondary-900: #831843;
+
+  /* Cores danger */
+  --color-danger-50: #fef2f2;
+  --color-danger-100: #fee2e2;
+  --color-danger-200: #fecaca;
+  --color-danger-300: #fca5a5;
+  --color-danger-400: #f87171;
+  --color-danger-500: #ef4444;
+  --color-danger-600: #dc2626;
+  --color-danger-700: #b91c1c;
+  --color-danger-800: #991b1b;
+  --color-danger-900: #7f1d1d;
+
+  /* Cores success */
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-200: #bbf7d0;
+  --color-success-300: #86efac;
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+  --color-success-800: #166534;
+  --color-success-900: #14532d;
+
+  /* Cores warning */
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+  --color-warning-900: #78350f;
+
+  /* Font family */
+  --font-family-sans: 'Inter', system-ui, -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', sans-serif;
+
+  /* Box shadows */
+  --shadow-notion: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-notion-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  /* Border radius */
+  --radius-notion: 3px;
+
+  /* Font sizes */
+  --font-size-notion-sm: 14px;
+  --line-height-notion-sm: 1.5;
+  --font-size-notion-base: 16px;
+  --line-height-notion-base: 1.5;
+}
+
+/* Reset e estilos base */
+* {
+  box-sizing: border-box;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Add some breathing room to containers */
+.container {
+  @apply px-4 md:px-6 lg:px-8;
+}
+
+/* Utility classes */
+.btn-primary {
+  @apply bg-primary-600 text-white font-medium py-2 px-4 rounded-lg border-none cursor-pointer transition-colors;
+}
+
+.btn-primary:hover:not(:disabled) {
+  @apply bg-primary-700;
+}
+
+.btn-primary:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.input-field {
+  @apply w-full px-3 py-2 border border-gray-300 dark:border-white/10 rounded-lg outline-none transition-all;
+  @apply bg-white dark:bg-notion-dark-bg text-gray-900 dark:text-white/90;
+  @apply placeholder-gray-400 dark:placeholder-white/40;
+}
+
+.input-field:focus {
+  @apply border-primary-500 ring-2 ring-primary-500/20;
+}
+
+.input-field:disabled {
+  @apply bg-gray-100 dark:bg-white/5 cursor-not-allowed;
+}
+
+.card {
+  @apply bg-white dark:bg-notion-dark-sidebar rounded-lg shadow dark:shadow-none dark:border dark:border-white/10 p-6;
+}
+
+/* Animações */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* Typing indicator animation */
+@keyframes typing-dot {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+.typing-dot {
+  animation: typing-dot 1.4s infinite;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Markdown Styles */
+.markdown-content {
+  @apply text-sm leading-relaxed;
+}
+
+.markdown-content h1 {
+  @apply text-xl font-bold mt-4 mb-2 text-[#37352f] dark:text-white/90;
+}
+
+.markdown-content h2 {
+  @apply text-lg font-bold mt-3 mb-2 text-[#37352f] dark:text-white/90;
+}
+
+.markdown-content h3 {
+  @apply text-base font-semibold mt-3 mb-1 text-[#37352f] dark:text-white/90;
+}
+
+.markdown-content p {
+  @apply mb-3;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  @apply mb-3 ml-4;
+}
+
+.markdown-content ul {
+  @apply list-disc;
+}
+
+.markdown-content ol {
+  @apply list-decimal;
+}
+
+.markdown-content li {
+  @apply mb-1;
+}
+
+.markdown-content strong {
+  @apply font-semibold text-[#37352f] dark:text-white;
+}
+
+.markdown-content em {
+  @apply italic;
+}
+
+.markdown-content code {
+  @apply px-1.5 py-0.5 bg-[#f7f6f3] dark:bg-white/10 rounded text-xs font-mono text-pink-600 dark:text-pink-400;
+}
+
+.markdown-content pre {
+  @apply mb-3 p-3 bg-[#f7f6f3] dark:bg-white/10 rounded-lg overflow-x-auto;
+}
+
+.markdown-content pre code {
+  @apply p-0 bg-transparent text-[#37352f] dark:text-white/90 text-xs;
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-[#37352f]/20 dark:border-white/20 pl-4 italic my-3 text-[#37352f]/70 dark:text-white/70;
+}
+
+.markdown-content a {
+  @apply text-purple-600 dark:text-purple-400 underline hover:text-purple-700 dark:hover:text-purple-300;
+}
+
+.markdown-content table {
+  @apply w-full border-collapse mb-3 text-xs;
+}
+
+.markdown-content thead {
+  @apply bg-[#f7f6f3] dark:bg-white/10;
+}
+
+.markdown-content th {
+  @apply border border-[#37352f]/10 dark:border-white/10 px-3 py-2 text-left font-semibold;
+}
+
+.markdown-content td {
+  @apply border border-[#37352f]/10 dark:border-white/10 px-3 py-2;
+}
+
+.markdown-content tr:hover {
+  @apply bg-[#f7f6f3]/50 dark:bg-white/5;
+}
+
+.markdown-content hr {
+  @apply my-4 border-t border-[#37352f]/10 dark:border-white/10;
+}
+
+/* Code syntax highlighting */
+.markdown-content .hljs {
+  @apply bg-transparent;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-white/20 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-white/30;
+}
