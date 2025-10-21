@@ -39,7 +39,12 @@
       "Bash(if [ -f nul ])",
       "Bash(then rm nul)",
       "Bash(else echo \"Arquivo nul não encontrado\")",
-      "Bash(fi)"
+      "Bash(fi)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []
