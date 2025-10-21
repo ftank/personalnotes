@@ -146,6 +146,27 @@ server.listen(PORT, async () => {
   try {
     console.log('🗄️  Inicializando Database...');
     await initializeDatabase();
+
+    // Run migrations automatically on first deploy
+    if (process.env.AUTO_MIGRATE === 'true') {
+      console.log('🔄 Running database migrations...');
+      const { query } = require('./src/config/database');
+      const fs = require('fs');
+      const path = require('path');
+
+      try {
+        const schemaSQL = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8');
+        await query(schemaSQL);
+        console.log('✅ Database migrations completed successfully!');
+      } catch (migrationError) {
+        // Ignore errors if tables already exist
+        if (migrationError.message.includes('already exists')) {
+          console.log('ℹ️  Database schema already exists, skipping migration');
+        } else {
+          console.error('⚠️  Migration error:', migrationError.message);
+        }
+      }
+    }
   } catch (error) {
     console.error('❌ Erro ao inicializar Database:', error.message);
     console.error('⚠️  O banco de dados não está disponível!');
