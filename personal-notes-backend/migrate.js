@@ -1,12 +1,17 @@
-const { query } = require('./src/config/database');
+require('dotenv').config();
+const { initializeDatabase, query, closeDatabase } = require('./src/config/database');
 const fs = require('fs');
 const path = require('path');
 
 async function runMigration() {
   try {
     console.log('🔄 Starting database migration...');
-    console.log('📁 Reading schema.sql...');
+    console.log('🔌 Connecting to database...');
 
+    // Initialize database connection
+    await initializeDatabase();
+
+    console.log('📁 Reading schema.sql...');
     const schemaSQL = fs.readFileSync(
       path.join(__dirname, 'schema.sql'),
       'utf8'
@@ -33,11 +38,13 @@ async function runMigration() {
     console.log('');
     console.log('🎉 Database is ready!');
 
+    await closeDatabase();
     process.exit(0);
   } catch (error) {
     console.error('❌ Migration failed:', error);
     console.error('');
     console.error('Error details:', error.message);
+    console.error('Stack:', error.stack);
     process.exit(1);
   }
 }
